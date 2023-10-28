@@ -15,7 +15,22 @@ private boolean activo;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.activo = activo;
+        
+        
     }
+
+    public Proveedor(String razonSocial, String domicilio, String telefono, boolean activo) {
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.activo = activo;
+    }
+
+    public Proveedor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     public int getIdProveedor() {
         return idProveedor;

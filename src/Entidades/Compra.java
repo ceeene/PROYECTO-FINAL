@@ -15,6 +15,12 @@ public class Compra {
         this.proveedor = proveedor;
         this.fecha = fecha;
         this.activo = activo;
+        
+        
+    }
+
+    public Compra(int idCompra) {
+        this.idCompra = idCompra;
     }
 
     public int getIdCompra() {
