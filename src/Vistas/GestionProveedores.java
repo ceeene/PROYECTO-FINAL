@@ -18,7 +18,7 @@ private ProveedorData proveeData=new ProveedorData();
     private Proveedor proveedorActual=null;
     
     public GestionProveedores() {
-        this.setSize(626, 626);
+        
         this.setContentPane(fondo);
         initComponents();
         
