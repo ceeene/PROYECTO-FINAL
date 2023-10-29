@@ -36,6 +36,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -45,8 +46,11 @@ public class MenuProveMax extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+            .addGap(0, 275, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("Productos");
         jMenuBar1.add(jMenu1);
@@ -56,6 +60,8 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         JMGestionProvee.setText("Proveedores");
 
+        jMenuItem1.setFont(new java.awt.Font("Heebo", 1, 12)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(204, 0, 0));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/proveedores.png"))); // NOI18N
         jMenuItem1.setText("Gestion de Proveedores");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -80,10 +86,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(escritorio)
-                .addContainerGap())
+            .addComponent(escritorio)
         );
 
         pack();

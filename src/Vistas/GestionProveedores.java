@@ -3,15 +3,25 @@ package Vistas;
 
 import AccesoADatos.ProveedorData;
 import Entidades.Proveedor;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class GestionProveedores extends javax.swing.JInternalFrame {
+    ImagenFondo fondo=new ImagenFondo();
+    
+    
 private ProveedorData proveeData=new ProveedorData();
     private Proveedor proveedorActual=null;
     
     public GestionProveedores() {
+        this.setSize(626, 626);
+        this.setContentPane(fondo);
         initComponents();
+        
     }
 
     
@@ -39,15 +49,26 @@ private ProveedorData proveeData=new ProveedorData();
         setTitle("Gestion de Proveedores");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setOpaque(false);
 
+        JLRSocial.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLRSocial.setForeground(new java.awt.Color(255, 255, 255));
         JLRSocial.setText("Razon Social:");
 
+        JLDomicilio.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLDomicilio.setForeground(new java.awt.Color(255, 255, 255));
         JLDomicilio.setText("Domicilio:");
 
+        JLTelefono.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLTelefono.setForeground(new java.awt.Color(255, 255, 255));
         JLTelefono.setText("Telefono:");
 
+        JRBEstado.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JRBEstado.setForeground(new java.awt.Color(255, 255, 255));
         JRBEstado.setText("Activo");
 
+        JBBuscar.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBBuscar.setForeground(new java.awt.Color(255, 0, 255));
         JBBuscar.setText("Buscar");
         JBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,8 +76,12 @@ private ProveedorData proveeData=new ProveedorData();
             }
         });
 
+        JLEstado.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLEstado.setForeground(new java.awt.Color(255, 255, 255));
         JLEstado.setText("Estado:");
 
+        JBNuevo.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBNuevo.setForeground(new java.awt.Color(255, 0, 255));
         JBNuevo.setText("Nuevo");
         JBNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +89,8 @@ private ProveedorData proveeData=new ProveedorData();
             }
         });
 
+        JBEliminar.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBEliminar.setForeground(new java.awt.Color(255, 0, 255));
         JBEliminar.setText("Eliminar");
         JBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +98,8 @@ private ProveedorData proveeData=new ProveedorData();
             }
         });
 
+        JBGuardar.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBGuardar.setForeground(new java.awt.Color(255, 0, 255));
         JBGuardar.setText("Guardar");
         JBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +107,8 @@ private ProveedorData proveeData=new ProveedorData();
             }
         });
 
+        JBSalir.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBSalir.setForeground(new java.awt.Color(255, 0, 255));
         JBSalir.setText("Salir");
         JBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +116,8 @@ private ProveedorData proveeData=new ProveedorData();
             }
         });
 
+        JLBusqueda.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLBusqueda.setForeground(new java.awt.Color(255, 255, 255));
         JLBusqueda.setText("Busqueda por id:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -117,13 +150,12 @@ private ProveedorData proveeData=new ProveedorData();
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(JLEstado)
                                 .addGap(85, 85, 85)
-                                .addComponent(JRBEstado)
-                                .addGap(18, 18, Short.MAX_VALUE))
+                                .addComponent(JRBEstado))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(JLBusqueda)
-                                .addGap(41, 41, 41)
-                                .addComponent(JTId, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(JTId, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBSalir)
                         .addGap(14, 14, 14))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -287,7 +319,17 @@ private void limpiarCampos(){
     JRBEstado.setSelected(true);
     
 }
-
+ class ImagenFondo extends JPanel{
+     private Image imagen;
+     
+     public void paint(Graphics g){
+         imagen=new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
+         g.drawImage(imagen,0,0,getWidth(), getHeight(), this);
+        setOpaque(false);
+         super.paint(g);
+         
+        }
+ }
 
 }
 
