@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2023 a las 01:10:43
+-- Tiempo de generación: 03-11-2023 a las 03:41:07
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `provemax`
+-- Base de datos: `provemax2`
 --
 
 -- --------------------------------------------------------
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL,
-  `proveedor` varchar(100) NOT NULL,
+  `idProveedor` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `estado` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -43,10 +43,10 @@ CREATE TABLE `compra` (
 CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioCosto` int(11) NOT NULL,
-  `compra` int(11) NOT NULL,
-  `producto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `precioCosto` double NOT NULL,
+  `idCompra` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -56,12 +56,12 @@ CREATE TABLE `detallecompra` (
 
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
-  `nombreProducto` varchar(100) NOT NULL,
-  `descripcion` varchar(200) NOT NULL,
+  `nombreProducto` varchar(20) NOT NULL,
+  `descripcion` int(11) NOT NULL,
   `precioActual` double NOT NULL,
   `stock` int(11) NOT NULL,
-  `estado` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -71,11 +71,18 @@ CREATE TABLE `producto` (
 
 CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL,
-  `razonSocial` varchar(100) NOT NULL,
-  `domicilio` varchar(100) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `estado` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `razonSocial` varchar(20) NOT NULL,
+  `domicilio` varchar(40) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`idProveedor`, `razonSocial`, `domicilio`, `telefono`, `estado`) VALUES
+(1, 'arcor', 'asdasd', 25615, 1);
 
 --
 -- Índices para tablas volcadas
@@ -85,13 +92,16 @@ CREATE TABLE `proveedor` (
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`idCompra`);
+  ADD PRIMARY KEY (`idCompra`),
+  ADD KEY `idProveedor` (`idProveedor`);
 
 --
 -- Indices de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD PRIMARY KEY (`idDetalle`);
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD KEY `idCompra` (`idCompra`),
+  ADD KEY `idProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `producto`
@@ -131,7 +141,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -141,19 +151,14 @@ ALTER TABLE `proveedor`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idCompra`) REFERENCES `detallecompra` (`idDetalle`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`);
 
 --
 -- Filtros para la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idDetalle`) REFERENCES `producto` (`idProducto`);
-
---
--- Filtros para la tabla `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `compra` (`idCompra`);
+  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`),
+  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
