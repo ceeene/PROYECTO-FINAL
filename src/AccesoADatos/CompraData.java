@@ -80,7 +80,28 @@ public class CompraData {
          }
         return compras;
  }
+     public List<Producto> ListaproductosXCompra (int idCompra){
+ 
+ String sql= "SELECT * FROM productos WHERE idCompra = ?";
+ 
+ ArrayList<Producto> productos= new ArrayList<>();
+ 
+ 
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs= ps.executeQuery();
+             if (rs.next()){
+                
+              producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setnombreProducto(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setprecioActual(rs.getInt("idPrecioactual"));
+                 producto.setStock(rs.getInt("stock"));
+                producto.setActivo (true);
+                
+                productos.add(producto);
+ }
      
-}
+
      
 
