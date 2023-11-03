@@ -50,6 +50,37 @@ public class CompraData {
          }
         return productos;
  }
+     
+     public List<Compra> ListaComprasXProveedor (Proveedor proveedor){
+ 
+ String sql= "SELECT * FROM compra WHERE proveedor = ?";
+ 
+ ArrayList<Compra> compras= new ArrayList<>();
+ 
+ 
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+         
+         
+             
+            ResultSet rs= ps.executeQuery();
+            
+            while (rs.next()){
+                
+              Compra compras= new Compra ();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.proveedor(rs.getString("proveedor"));
+                /*falta linea to local date*/
+                compra.setActivo (true);
+                
+                compras.add(compra);
+ }
+       } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "error");
+         }
+        return compras;
+ }
+     
 }
      
 
