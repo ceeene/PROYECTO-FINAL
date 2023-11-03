@@ -19,6 +19,10 @@ public class Producto {
         this.activo = activo;
     }
 
+    public Producto() {
+    }
+    
+
     public int getIdProducto() {
         return idProducto;
     }
