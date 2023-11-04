@@ -28,7 +28,7 @@ public class ProveedorData {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
-            ps.setString(3, proveedor.getTelefono());
+            ps.setInt(3, proveedor.getTelefono());
             ps.setBoolean(4, proveedor.isActivo());
             ps.executeUpdate(); 
             
@@ -78,7 +78,7 @@ public class ProveedorData {
         proveedor.setIdProveedor(id);
         proveedor.setRazonSocial(rs.getString("razonSocial"));
         proveedor.setDomicilio(rs.getString("domicilio"));
-        proveedor.setTelefono(rs.getString("telefono"));
+        proveedor.setTelefono(rs.getInt("telefono"));
         proveedor.setActivo(true);
     
     }else{
@@ -93,7 +93,27 @@ public class ProveedorData {
 return proveedor;
     }
        
-        
+     
+    public void modificarProveedor (Proveedor proveedor){
+
+String sql="UPDATE proveedor SET razonSocial= ?, domicilio= ?, telefono= ? "
+        + "WHERE  idProveedor=? ";
+try {
+PreparedStatement ps= con.prepareStatement(sql);
+ ps.setString(1, proveedor.getRazonSocial());
+ ps.setString(2, proveedor.getDomicilio());
+ ps.setInt(3, proveedor.getTelefono());
+ int exito =ps.executeUpdate();
+ 
+ if (exito ==1) {}
+ 
+ JOptionPane.showMessageDialog(null, "Proveedor modificado correctamente");
+} catch (SQLException ex) {
+
+JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores");
+} 
+ }
+ 
     
 }
 

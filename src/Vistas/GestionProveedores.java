@@ -224,8 +224,8 @@ private ProveedorData proveeData=new ProveedorData();
         try{
         String razonSocial=JTRSocial.getText();
         String domicilio=JTDomicilio.getText();
-        String telefono=JTTelefono.getText();
-        if(razonSocial.isEmpty()|| telefono.isEmpty() || domicilio.isEmpty()){
+        Integer telefono=Integer.parseInt(JTTelefono.getText());
+        if(razonSocial.isEmpty()|| domicilio.isEmpty()){
             JOptionPane.showMessageDialog(this,"No puede haber campos vacios");
             return;
         }
@@ -280,7 +280,7 @@ private ProveedorData proveeData=new ProveedorData();
               
               JTRSocial.setText(proveedorActual.getRazonSocial());
               JTDomicilio.setText(proveedorActual.getDomicilio());
-              JTTelefono.setText(proveedorActual.getTelefono());
+              JTTelefono.setText(proveedorActual.getTelefono()+""); 
               JRBEstado.setSelected(proveedorActual.isActivo());
               
           }
