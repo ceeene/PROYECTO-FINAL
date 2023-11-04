@@ -26,8 +26,16 @@ private boolean activo;
         this.activo = activo;
     }
 
+    public Proveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    
+    
+   
+
     public Proveedor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
     
     

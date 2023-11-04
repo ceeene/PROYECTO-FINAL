@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 public class ProveedorData {
      private Connection con = null;
+     Proveedor proveedor=null;
      
      
      public ProveedorData() {
@@ -66,14 +67,15 @@ public class ProveedorData {
    
     public Proveedor buscarProveedor(int id){
     String sql="SELECT razonSocial, domicilio, telefono FROM proveedor WHERE idProveedor = ? AND estado=1"; 
-    Proveedor proveedor=null;
+    PreparedStatement ps=null;
     try{
-    PreparedStatement ps=con.prepareStatement(sql);
+    ps=con.prepareStatement(sql);
     ps.setInt(1,id);
     ResultSet rs=ps.executeQuery();
     if(rs.next()){
         
         proveedor=new Proveedor();
+        proveedor.setIdProveedor(id);
         proveedor.setRazonSocial(rs.getString("razonSocial"));
         proveedor.setDomicilio(rs.getString("domicilio"));
         proveedor.setTelefono(rs.getString("telefono"));
