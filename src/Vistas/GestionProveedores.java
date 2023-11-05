@@ -240,7 +240,7 @@ private ProveedorData proveeData=new ProveedorData();
             proveedorActual.setRazonSocial(razonSocial);
             proveedorActual.setDomicilio(domicilio);
             proveedorActual.setTelefono(telefono);
-            //proveeData.modificarProveedor(proveedorActual);
+            proveeData.modificarProveedor(proveedorActual);
             
         }
         
@@ -317,6 +317,7 @@ private void limpiarCampos(){
     JTDomicilio.setText("");
     JTTelefono.setText("");
     JRBEstado.setSelected(true);
+    JTId.setText("");
     
 }
  class ImagenFondo extends JPanel{

@@ -39,6 +39,7 @@ public class ProveedorData {
                 
             }
             ps.close();
+            //limpiarCampos();
             
             
         } catch (SQLException ex) {
@@ -114,6 +115,7 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
 } 
  }
  
+    
     
 }
 
