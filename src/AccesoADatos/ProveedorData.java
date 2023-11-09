@@ -98,7 +98,7 @@ return proveedor;
     public void modificarProveedor (Proveedor proveedor){
 
 String sql="UPDATE proveedor SET razonSocial= ?, domicilio= ?, telefono= ? "
-        + "WHERE  idProveedor=? ";
+        + "WHERE  idProveedor=? " ;
 try {
 PreparedStatement ps= con.prepareStatement(sql);
  ps.setString(1, proveedor.getRazonSocial());
@@ -106,10 +106,12 @@ PreparedStatement ps= con.prepareStatement(sql);
  ps.setInt(3, proveedor.getTelefono());
  int exito =ps.executeUpdate();
  
- if (exito ==1) {}
+ if (exito ==1) {
  
  JOptionPane.showMessageDialog(null, "Proveedor modificado correctamente");
-} catch (SQLException ex) {
+} 
+
+}catch (SQLException ex) {
 
 JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores");
 } 
