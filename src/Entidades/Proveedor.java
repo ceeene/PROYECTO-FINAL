@@ -30,6 +30,19 @@ private boolean activo;
         this.idProveedor = idProveedor;
     }
 
+    public Proveedor(String razonSocial, String domicilio, int telefono) {
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+
+    public Proveedor(int idProveedor, String razonSocial, String domicilio, int telefono) {
+        this.idProveedor = idProveedor;
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+
     
     
    

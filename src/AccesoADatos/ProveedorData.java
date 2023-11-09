@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -96,24 +98,22 @@ return proveedor;
     }
        
      
-    public void modificarProveedor (Proveedor proveedor){
-
-String sql="UPDATE proveedor SET razonSocial= ?, domicilio= ?, telefono= ? "
+public void modificarProveedor (Proveedor proveedor){
+    String sql="UPDATE proveedor SET razonSocial= ?, domicilio= ?, telefono= ?"
         + "WHERE  idProveedor=? " ;
-try {
-PreparedStatement ps= con.prepareStatement(sql);
- ps.setString(1, proveedor.getRazonSocial());
- ps.setString(2, proveedor.getDomicilio());
- ps.setInt(3, proveedor.getTelefono());
- int exito =ps.executeUpdate();
- 
- if (exito ==1) {
+     try {
+    PreparedStatement ps= con.prepareStatement(sql);
+    ps.setString(1, proveedor.getRazonSocial());
+    ps.setString(2, proveedor.getDomicilio());
+    ps.setInt(3, proveedor.getTelefono());
+    int exito=ps.executeUpdate();
+    if (exito==1) {
  
  JOptionPane.showMessageDialog(null, "Proveedor modificado correctamente");
 } 
 
 }catch (SQLException ex) {
-
+ex.printStackTrace();
 JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores");
 } 
  }
@@ -147,7 +147,36 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
 return proveedor;
     }
        
-     
+    /* public List<Proveedor> ListaProveedores (){
+ 
+ String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 1";
+ 
+ ArrayList<Proveedor> proveedores= new ArrayList<>();
+ 
+ 
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+         
+         
+             
+            ResultSet rs= ps.executeQuery();
+            
+            while (rs.next()){
+                
+              Proveedor proveedor= new Proveedor ();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getInt("telefono"));
+                proveedor.setActivo (true);
+                
+                proveedor.add(proveedor);
+ }
+} catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error");
+         }
+        return proveedor;
+ }*/
     
 }
 

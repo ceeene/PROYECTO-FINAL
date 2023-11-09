@@ -34,6 +34,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        JMIListarP = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -71,6 +72,14 @@ public class MenuProveMax extends javax.swing.JFrame {
         });
         JMGestionProvee.add(jMenuItem1);
 
+        JMIListarP.setText("Listar Proveedores");
+        JMIListarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIListarPActionPerformed(evt);
+            }
+        });
+        JMGestionProvee.add(JMIListarP);
+
         jMenuBar1.add(JMGestionProvee);
 
         setJMenuBar(jMenuBar1);
@@ -101,6 +110,15 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.moveToFront(gp);
                                     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void JMIListarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListarPActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+        ListarProveedores lp=new ListarProveedores();
+        lp.setVisible(true);
+        escritorio.add(lp);
+        escritorio.moveToFront(lp); 
+    }//GEN-LAST:event_JMIListarPActionPerformed
 
     
     public static void main(String args[]) {
@@ -137,6 +155,7 @@ public class MenuProveMax extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu JMGestionProvee;
+    private javax.swing.JMenuItem JMIListarP;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
