@@ -45,6 +45,7 @@ private ProveedorData proveeData=new ProveedorData();
         JBSalir = new javax.swing.JButton();
         JLBusqueda = new javax.swing.JLabel();
         JTId = new javax.swing.JTextField();
+        JBBuscarRS = new javax.swing.JButton();
 
         setTitle("Gestion de Proveedores");
 
@@ -120,6 +121,15 @@ private ProveedorData proveeData=new ProveedorData();
         JLBusqueda.setForeground(new java.awt.Color(255, 255, 255));
         JLBusqueda.setText("Busqueda por id:");
 
+        JBBuscarRS.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JBBuscarRS.setForeground(new java.awt.Color(255, 0, 255));
+        JBBuscarRS.setText("Buscar");
+        JBBuscarRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBBuscarRSActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,7 +154,9 @@ private ProveedorData proveeData=new ProveedorData();
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(JBBuscar)))
-                        .addGap(121, 121, 121))
+                        .addGap(18, 18, 18)
+                        .addComponent(JBBuscarRS)
+                        .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -170,11 +182,12 @@ private ProveedorData proveeData=new ProveedorData();
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLRSocial)
-                    .addComponent(JTRSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(JTRSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBBuscarRS))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JLDomicilio))
@@ -292,9 +305,32 @@ private ProveedorData proveeData=new ProveedorData();
 
     }//GEN-LAST:event_JBBuscarActionPerformed
 
+    private void JBBuscarRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarRSActionPerformed
+        try{
+          
+          String razonSocial=(JTRSocial.getText());
+          proveedorActual=proveeData.buscarProveedorPorRazonSocial(razonSocial);
+          if(proveedorActual!=null){
+              
+              JTDomicilio.setText(proveedorActual.getDomicilio());
+              JTTelefono.setText(proveedorActual.getTelefono()+""); 
+              JRBEstado.setSelected(proveedorActual.isActivo());
+              JTId.setText(proveedorActual.getIdProveedor()+"");
+              
+          }
+          
+      }catch (NumberFormatException ex){
+          JOptionPane.showMessageDialog(this,"Debe ingresar una razon social valida");
+      }  
+                                          
+                                    
+
+    }//GEN-LAST:event_JBBuscarRSActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBBuscar;
+    private javax.swing.JButton JBBuscarRS;
     private javax.swing.JButton JBEliminar;
     private javax.swing.JButton JBGuardar;
     private javax.swing.JButton JBNuevo;
