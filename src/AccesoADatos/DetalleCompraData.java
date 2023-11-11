@@ -43,4 +43,5 @@ public class DetalleCompraData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de detallesCompras");
         }
     
+ }
 }
