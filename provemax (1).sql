@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2023 a las 03:41:07
+-- Tiempo de generación: 12-11-2023 a las 10:49:59
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `provemax2`
+-- Base de datos: `provemax`
 --
 
 -- --------------------------------------------------------
@@ -31,8 +31,15 @@ CREATE TABLE `compra` (
   `idCompra` int(11) NOT NULL,
   `idProveedor` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `estado` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idCompra`, `idProveedor`, `fecha`, `estado`) VALUES
+(1, 1, '2023-11-02', 1);
 
 -- --------------------------------------------------------
 
@@ -42,11 +49,19 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
+  `idProducto` int(11) DEFAULT NULL,
+  `idCompra` int(11) DEFAULT NULL,
   `cantidad` int(11) NOT NULL,
-  `precioCosto` double NOT NULL,
-  `idCompra` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `precioCosto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detallecompra`
+--
+
+INSERT INTO `detallecompra` (`idDetalle`, `idProducto`, `idCompra`, `cantidad`, `precioCosto`) VALUES
+(1, 1, 1, 5, 1800),
+(2, 2, 1, 8, 2300);
 
 -- --------------------------------------------------------
 
@@ -56,12 +71,20 @@ CREATE TABLE `detallecompra` (
 
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
-  `nombreProducto` varchar(20) NOT NULL,
-  `descripcion` int(11) NOT NULL,
+  `nombreProducto` varchar(100) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
   `precioActual` double NOT NULL,
   `stock` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `estado` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idProducto`, `nombreProducto`, `descripcion`, `precioActual`, `stock`, `estado`) VALUES
+(1, 'Galletitas', 'Azucaradas', 670, 70, 1),
+(2, 'fideos', 'de harina', 600, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -71,18 +94,18 @@ CREATE TABLE `producto` (
 
 CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL,
-  `razonSocial` varchar(20) NOT NULL,
-  `domicilio` varchar(40) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `razonSocial` varchar(100) NOT NULL,
+  `domicilio` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `estado` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proveedor`
 --
 
 INSERT INTO `proveedor` (`idProveedor`, `razonSocial`, `domicilio`, `telefono`, `estado`) VALUES
-(1, 'arcor', 'asdasd', 25615, 1);
+(1, 'distribuidora el sol', 'calle Buenos Aires 1234', '26657867890', 1);
 
 --
 -- Índices para tablas volcadas
@@ -123,19 +146,19 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
