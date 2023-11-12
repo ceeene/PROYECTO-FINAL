@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import AccesoADatos.ProveedorData;
+import Entidades.Proveedor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,12 +17,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListarProveedores extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo; 
+    private List<Proveedor> listaPA;
+    private ProveedorData pData;
   
     
     
     public ListarProveedores() {
         initComponents();
         armarCabeceraTabla();
+        pData=new ProveedorData();
+        listaPA = pData.listaProveedoresActivos();
+        modelo=new DefaultTableModel();
     }
 
     
@@ -39,6 +46,11 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         jLabel1.setText("Control de Proveedores activos e inactivos");
 
         JRBActivos.setText("Activos");
+        JRBActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JRBActivosActionPerformed(evt);
+            }
+        });
 
         JRBInactivos.setText("Inactivos");
 
@@ -91,6 +103,25 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargaDatosActivos(){
+    listaPA = pData.listaProveedoresActivos();
+    for (Proveedor p: listaPA){
+        modelo.addRow(new Object[] {p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+    }
+}
+    
+    
+    
+    private void JRBActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBActivosActionPerformed
+        borrarFilaTabla();
+        JRBInactivos.setSelected(false);
+        cargaDatosActivos();
+        JRBActivos.setEnabled(true);
+        JRBInactivos.setEnabled(false);
+        
+        
+    }//GEN-LAST:event_JRBActivosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRBActivos;
@@ -106,12 +137,18 @@ private void armarCabeceraTabla(){
         filaCabecera.add("Razon Social"); 
         filaCabecera.add("Domicilio"); 
         filaCabecera.add("Telefono");
+        filaCabecera.add("Estado");
         for(Object it: filaCabecera){
             modelo.addColumn(it); 
         }
         JTProveedores.setModel(modelo);
     }
 
-
+private void borrarFilaTabla(){
+    int indice = modelo.getRowCount()-1;
+    for (int i = indice; i>=0;i--){
+        modelo.removeRow(i);
+    }
+}
 
 }

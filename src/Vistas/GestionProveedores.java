@@ -262,7 +262,7 @@ private ProveedorData proveeData=new ProveedorData();
          JOptionPane.showMessageDialog(this,"Verifique los datos ingresados");   
         }  
                                              
-
+       limpiarCampos();
     }//GEN-LAST:event_JBGuardarActionPerformed
 
     private void JBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalirActionPerformed
@@ -288,7 +288,7 @@ private ProveedorData proveeData=new ProveedorData();
     private void JBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarActionPerformed
         try{
           Integer id=Integer.parseInt(JTId.getText());
-          proveedorActual=proveeData.buscarProveedor(id);
+          proveedorActual=proveeData.buscarProveedorPorId(id);
           if(proveedorActual!=null){
               
               JTRSocial.setText(proveedorActual.getRazonSocial());
@@ -300,18 +300,20 @@ private ProveedorData proveeData=new ProveedorData();
           
       }catch (NumberFormatException ex){
           JOptionPane.showMessageDialog(this,"Debe ingresar un numero de id valido");
+          limpiarCampos();
       }  
                                           
-
+      
     }//GEN-LAST:event_JBBuscarActionPerformed
 
     private void JBBuscarRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarRSActionPerformed
         try{
           
-          String razonSocial=(JTRSocial.getText());
+          String razonSocial=(JTRSocial.getText().toLowerCase());
           proveedorActual=proveeData.buscarProveedorPorRazonSocial(razonSocial);
           if(proveedorActual!=null){
-              
+             
+                          
               JTDomicilio.setText(proveedorActual.getDomicilio());
               JTTelefono.setText(proveedorActual.getTelefono()+""); 
               JRBEstado.setSelected(proveedorActual.isActivo());
@@ -321,6 +323,7 @@ private ProveedorData proveeData=new ProveedorData();
           
       }catch (NumberFormatException ex){
           JOptionPane.showMessageDialog(this,"Debe ingresar una razon social valida");
+          limpiarCampos();
       }  
                                           
                                     
@@ -352,7 +355,7 @@ private void limpiarCampos(){
     JTRSocial.setText("");
     JTDomicilio.setText("");
     JTTelefono.setText("");
-    JRBEstado.setSelected(true);
+    JRBEstado.setSelected(false);
     JTId.setText("");
     
 }

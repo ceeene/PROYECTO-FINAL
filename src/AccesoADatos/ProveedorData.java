@@ -10,20 +10,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class ProveedorData {
-     private Connection con = null;
+     private Connection con = null; //objeto conexion para importar datos a la bdd
      Proveedor proveedor=null;
+     private DefaultTableModel modelo; 
+    private List<Proveedor> listaPA;
+    private ProveedorData pData;
      
      
      
-     public ProveedorData() {
+     public ProveedorData() {  //constructor
 
- con = Conexion.getConexion();
+ con = Conexion.getConexion(); //inicializo la variable con
+ pData=new ProveedorData();
+        listaPA = pData.listaProveedoresActivos();
+        modelo=new DefaultTableModel();
  
  }
-  public void guardarProveedor(Proveedor proveedor){
+  public void guardarProveedor(Proveedor proveedor){ //importo la clase del paquete entidades
      String sql="INSERT INTO proveedor(razonSocial, domicilio, telefono, estado)"
              + "VALUES(?, ?, ?,?)"; 
      
@@ -41,8 +48,8 @@ public class ProveedorData {
                 JOptionPane.showMessageDialog(null, "Proveedor agregado exitosamente");
                 
             }
-            ps.close();
-            //limpiarCampos();
+            ps.close(); //cierro el objeto PreparedStatement
+         
             
             
         } catch (SQLException ex) {
@@ -55,7 +62,7 @@ public class ProveedorData {
  } 
   
    public void eliminarProveedor(int id) {
-    String sql= "UPDATE alumno SET estado= 0 WHERE idProveedor= ? ";
+    String sql= "UPDATE proveedor SET estado= 0 WHERE idProveedor= ? ";
          try{ 
             PreparedStatement ps = con.prepareStatement(sql);
              ps.setInt(1, id);
@@ -69,11 +76,11 @@ public class ProveedorData {
      }
  } 
    
-    public Proveedor buscarProveedor(int id){
+    public Proveedor buscarProveedorPorId(int id){
     String sql="SELECT razonSocial, domicilio, telefono FROM proveedor WHERE idProveedor = ? AND estado=1"; 
-    PreparedStatement ps=null;
+    Proveedor proveedor=null;
     try{
-    ps=con.prepareStatement(sql);
+    PreparedStatement ps=con.prepareStatement(sql);
     ps.setInt(1,id);
     ResultSet rs=ps.executeQuery();
     if(rs.next()){
@@ -100,12 +107,13 @@ return proveedor;
      
 public void modificarProveedor (Proveedor proveedor){
     String sql="UPDATE proveedor SET razonSocial= ?, domicilio= ?, telefono= ?"
-        + "WHERE  idProveedor=? " ;
+        + "WHERE  idProveedor = ?";
      try {
     PreparedStatement ps= con.prepareStatement(sql);
     ps.setString(1, proveedor.getRazonSocial());
     ps.setString(2, proveedor.getDomicilio());
     ps.setInt(3, proveedor.getTelefono());
+    ps.setInt(4, proveedor.getIdProveedor());
     int exito=ps.executeUpdate();
     if (exito==1) {
  
@@ -113,7 +121,6 @@ public void modificarProveedor (Proveedor proveedor){
 } 
 
 }catch (SQLException ex) {
-ex.printStackTrace();
 JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores");
 } 
  }
@@ -121,9 +128,9 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
     
     public Proveedor buscarProveedorPorRazonSocial(String razonSocial){
     String sql="SELECT idProveedor, domicilio, telefono FROM proveedor WHERE razonSocial = ? AND estado=1"; 
-    PreparedStatement ps=null;
+    Proveedor proveedor=null;
     try{
-    ps=con.prepareStatement(sql);
+    PreparedStatement ps=con.prepareStatement(sql);
     ps.setString(1,razonSocial);
     ResultSet rs=ps.executeQuery();
     if(rs.next()){
@@ -147,7 +154,7 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
 return proveedor;
     }
        
-    /* public List<Proveedor> ListaProveedores (){
+    public List<Proveedor> listaProveedoresActivos (){
  
  String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 1";
  
@@ -157,8 +164,7 @@ return proveedor;
          try {
              PreparedStatement ps = con.prepareStatement(sql);
          
-         
-             
+                    
             ResultSet rs= ps.executeQuery();
             
             while (rs.next()){
@@ -170,13 +176,58 @@ return proveedor;
                 proveedor.setTelefono(rs.getInt("telefono"));
                 proveedor.setActivo (true);
                 
-                proveedor.add(proveedor);
+                proveedores.add(proveedor);
  }
 } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error");
          }
-        return proveedor;
- }*/
+        return proveedores;
+ }
     
+    public List<Proveedor> listaProveedoresNOActivos (){
+ 
+ String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 0";
+ 
+ ArrayList<Proveedor> proveedores= new ArrayList<>();
+ 
+ 
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+         
+                    
+            ResultSet rs= ps.executeQuery();
+            
+            while (rs.next()){
+                
+              Proveedor proveedor= new Proveedor ();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getInt("telefono"));
+                proveedor.setActivo (false);
+                
+                proveedores.add(proveedor);
+ }
+} catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error");
+         }
+        return proveedores;
+    
+    }
+    
+/*private void cargaDatosActivos(){
+    listaPA = pData.listaProveedoresActivos();
+    for (Proveedor p: listaPA){
+        modelo.addRow(new Object[] {p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+    }
+}
+
+private void cargaDatosInactivos(){
+    listaPA = pData.listaProveedoresNOActivos();
+    for (Proveedor p: listaPA){
+        modelo.addRow(new Object[] {p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+    }
+}*/
+
 }
 
