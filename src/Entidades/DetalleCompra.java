@@ -9,8 +9,19 @@ public class DetalleCompra {
     private Compra compra;
     private Producto producto;
 
+    public DetalleCompra() {
+    }
+    
+    
+
     public DetalleCompra(int idDetalle, int cantidad, double precioCosto, Compra compra, Producto producto) {
         this.idDetalle = idDetalle;
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.compra = compra;
+        this.producto = producto;
+    }
+    public DetalleCompra(int cantidad, double precioCosto, Compra compra, Producto producto) {
         this.cantidad = cantidad;
         this.precioCosto = precioCosto;
         this.compra = compra;

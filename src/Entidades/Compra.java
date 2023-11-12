@@ -14,9 +14,10 @@ public class Compra {
         this.idCompra = idCompra;
         this.proveedor = proveedor;
         this.fecha = fecha;
-        this.activo = activo;
-        
-        
+        this.activo = activo;   
+    }
+
+    public Compra() {
     }
 
     public Compra(int idCompra) {
