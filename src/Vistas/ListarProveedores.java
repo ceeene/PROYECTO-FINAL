@@ -16,18 +16,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Celia
  */
 public class ListarProveedores extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo; 
-    private List<Proveedor> listaPA;
-    private ProveedorData pData;
+//    private DefaultTableModel modelo; 
+//    private List<Proveedor> listaPA;
+//    private ProveedorData pData;
   
     
     
     public ListarProveedores() {
         initComponents();
-        armarCabeceraTabla();
-        pData=new ProveedorData();
-        listaPA = pData.listaProveedoresActivos();
-        modelo=new DefaultTableModel();
+//        armarCabeceraTabla();
+//        pData=new ProveedorData();
+//        listaPA = pData.listaProveedoresActivos();
+//        modelo=new DefaultTableModel();
     }
 
     
@@ -103,22 +103,22 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargaDatosActivos(){
-    listaPA = pData.listaProveedoresActivos();
-    for (Proveedor p: listaPA){
-        modelo.addRow(new Object[] {p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
-    }
-}
-    
-    
-    
+//    private void cargaDatosActivos(){
+//    listaPA = pData.listaProveedoresActivos();
+//    for (Proveedor p: listaPA){
+//        modelo.addRow(new Object[] {p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+//    }
+//}
+//    
+//    
+//    
     private void JRBActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBActivosActionPerformed
-        borrarFilaTabla();
-        JRBInactivos.setSelected(false);
-        cargaDatosActivos();
-        JRBActivos.setEnabled(true);
-        JRBInactivos.setEnabled(false);
-        
+//        borrarFilaTabla();
+//        JRBInactivos.setSelected(false);
+//        cargaDatosActivos();
+//        JRBActivos.setEnabled(true);
+//        JRBInactivos.setEnabled(false);
+//        
         
     }//GEN-LAST:event_JRBActivosActionPerformed
 
@@ -131,24 +131,24 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-private void armarCabeceraTabla(){
-        ArrayList<Object> filaCabecera = new ArrayList<>(); 
-        filaCabecera.add("ID"); 
-        filaCabecera.add("Razon Social"); 
-        filaCabecera.add("Domicilio"); 
-        filaCabecera.add("Telefono");
-        filaCabecera.add("Estado");
-        for(Object it: filaCabecera){
-            modelo.addColumn(it); 
-        }
-        JTProveedores.setModel(modelo);
-    }
-
-private void borrarFilaTabla(){
-    int indice = modelo.getRowCount()-1;
-    for (int i = indice; i>=0;i--){
-        modelo.removeRow(i);
-    }
-}
+//private void armarCabeceraTabla(){
+//        ArrayList<Object> filaCabecera = new ArrayList<>(); 
+//        filaCabecera.add("ID"); 
+//        filaCabecera.add("Razon Social"); 
+//        filaCabecera.add("Domicilio"); 
+//        filaCabecera.add("Telefono");
+//        filaCabecera.add("Estado");
+//        for(Object it: filaCabecera){
+//            modelo.addColumn(it); 
+//        }
+//        JTProveedores.setModel(modelo);
+//    }
+//
+//private void borrarFilaTabla(){
+//    int indice = modelo.getRowCount()-1;
+//    for (int i = indice; i>=0;i--){
+//        modelo.removeRow(i);
+//    }
+//}
 
 }

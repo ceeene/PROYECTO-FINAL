@@ -16,18 +16,18 @@ import javax.swing.table.DefaultTableModel;
 public class ProveedorData {
      private Connection con = null; //objeto conexion para importar datos a la bdd
      Proveedor proveedor=null;
-     private DefaultTableModel modelo; 
-    private List<Proveedor> listaPA;
-    private ProveedorData pData;
+//     private DefaultTableModel modelo; 
+//    private List<Proveedor> listaPA;
+//    private ProveedorData pData;
      
      
      
      public ProveedorData() {  //constructor
 
  con = Conexion.getConexion(); //inicializo la variable con
- pData=new ProveedorData();
-        listaPA = pData.listaProveedoresActivos();
-        modelo=new DefaultTableModel();
+// pData=new ProveedorData();
+//        listaPA = pData.listaProveedoresActivos();
+//        modelo=new DefaultTableModel();
  
  }
   public void guardarProveedor(Proveedor proveedor){ //importo la clase del paquete entidades
@@ -154,67 +154,67 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
 return proveedor;
     }
        
-    public List<Proveedor> listaProveedoresActivos (){
- 
- String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 1";
- 
- ArrayList<Proveedor> proveedores= new ArrayList<>();
- 
- 
-         try {
-             PreparedStatement ps = con.prepareStatement(sql);
-         
-                    
-            ResultSet rs= ps.executeQuery();
-            
-            while (rs.next()){
-                
-              Proveedor proveedor= new Proveedor ();
-                proveedor.setIdProveedor(rs.getInt("idProveedor"));
-                proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getInt("telefono"));
-                proveedor.setActivo (true);
-                
-                proveedores.add(proveedor);
- }
-} catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error");
-         }
-        return proveedores;
- }
-    
-    public List<Proveedor> listaProveedoresNOActivos (){
- 
- String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 0";
- 
- ArrayList<Proveedor> proveedores= new ArrayList<>();
- 
- 
-         try {
-             PreparedStatement ps = con.prepareStatement(sql);
-         
-                    
-            ResultSet rs= ps.executeQuery();
-            
-            while (rs.next()){
-                
-              Proveedor proveedor= new Proveedor ();
-                proveedor.setIdProveedor(rs.getInt("idProveedor"));
-                proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getInt("telefono"));
-                proveedor.setActivo (false);
-                
-                proveedores.add(proveedor);
- }
-} catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error");
-         }
-        return proveedores;
-    
-    }
-    
+//    public List<Proveedor> listaProveedoresActivos (){
+// 
+// String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 1";
+// 
+// ArrayList<Proveedor> proveedores= new ArrayList<>();
+// 
+// 
+//         try {
+//             PreparedStatement ps = con.prepareStatement(sql);
+//         
+//                    
+//            ResultSet rs= ps.executeQuery();
+//            
+//            while (rs.next()){
+//                
+//              Proveedor proveedor= new Proveedor ();
+//                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+//                proveedor.setRazonSocial(rs.getString("razonSocial"));
+//                proveedor.setDomicilio(rs.getString("domicilio"));
+//                proveedor.setTelefono(rs.getInt("telefono"));
+//                proveedor.setActivo (true);
+//                
+//                proveedores.add(proveedor);
+// }
+//} catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "error");
+//         }
+//        return proveedores;
+// }
+//    
+//    public List<Proveedor> listaProveedoresNOActivos (){
+// 
+// String sql= "SELECT idProveedor, razonSocial, direccion, telefono, estado FROM proveedor WHERE estado = 0";
+// 
+// ArrayList<Proveedor> proveedores= new ArrayList<>();
+// 
+// 
+//         try {
+//             PreparedStatement ps = con.prepareStatement(sql);
+//         
+//                    
+//            ResultSet rs= ps.executeQuery();
+//            
+//            while (rs.next()){
+//                
+//              Proveedor proveedor= new Proveedor ();
+//                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+//                proveedor.setRazonSocial(rs.getString("razonSocial"));
+//                proveedor.setDomicilio(rs.getString("domicilio"));
+//                proveedor.setTelefono(rs.getInt("telefono"));
+//                proveedor.setActivo (false);
+//                
+//                proveedores.add(proveedor);
+// }
+//} catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "error");
+//         }
+//        return proveedores;
+//    
+//    }
+//    
 /*private void cargaDatosActivos(){
     listaPA = pData.listaProveedoresActivos();
     for (Proveedor p: listaPA){
