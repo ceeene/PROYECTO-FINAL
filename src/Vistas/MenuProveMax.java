@@ -137,7 +137,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.repaint();
         DetallesCompras detC=new DetallesCompras();
         detC.setVisible(true);
-        detC.getContentPane().setBackground(Color.red); 
+        detC.getContentPane().setBackground(Color.ORANGE); 
         escritorio.add(detC);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
