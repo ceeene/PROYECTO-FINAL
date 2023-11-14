@@ -18,16 +18,16 @@ public class ProveMax {
         
         
 
-//        CompraData compData = new CompraData();
-//        Compra comp = compData.obtenerCompraPorId(1);
-//        DetalleCompraData detCompra = new DetalleCompraData();
-//        for(DetalleCompra item:detCompra.buscarDetallePorCompra(comp)){
-//            System.out.println(item.getIdDetalle());
-//            System.out.println(item.getCantidad());
-//            System.out.println(item.getPrecioCosto());
-//            System.out.println(item.getProducto().getNombreProducto());
-//            
-//        }
+        CompraData compData = new CompraData();
+        Compra comp = compData.obtenerCompraPorId(1);
+        DetalleCompraData detCompra = new DetalleCompraData();
+        for(DetalleCompra item:detCompra.buscarDetallePorCompra(comp)){
+            System.out.println(item.getIdDetalle());
+            System.out.println(item.getCantidad());
+            System.out.println(item.getPrecioCosto());
+            System.out.println(item.getProducto().getNombreProducto());
+            
+        }
         
         
         
