@@ -1,6 +1,7 @@
 
 package Vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -31,7 +32,8 @@ public class MenuProveMax extends javax.swing.JFrame {
         };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMDetalles = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMIListarP = new javax.swing.JMenuItem();
@@ -56,8 +58,17 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenu1.setText("Productos");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Compras");
-        jMenuBar1.add(jMenu2);
+        jMDetalles.setText("Compras");
+
+        jMenuItem2.setText("Detalles de Compras");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMDetalles.add(jMenuItem2);
+
+        jMenuBar1.add(jMDetalles);
 
         JMGestionProvee.setText("Proveedores");
 
@@ -120,6 +131,16 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.moveToFront(lp); 
     }//GEN-LAST:event_JMIListarPActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        DetallesCompras detC=new DetallesCompras();
+        detC.setVisible(true);
+        detC.getContentPane().setBackground(Color.red); 
+        escritorio.add(detC);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -157,9 +178,10 @@ public class MenuProveMax extends javax.swing.JFrame {
     private javax.swing.JMenu JMGestionProvee;
     private javax.swing.JMenuItem JMIListarP;
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMDetalles;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
