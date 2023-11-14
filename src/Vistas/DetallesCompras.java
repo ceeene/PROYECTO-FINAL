@@ -10,6 +10,7 @@ import Entidades.Compra;
 import Entidades.DetalleCompra;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +23,8 @@ public class DetallesCompras extends javax.swing.JFrame {
     private CompraData compData = new CompraData();
     private DetalleCompraData detCompra = new DetalleCompraData();
     private Compra comp = null;
-     private DefaultTableModel modelo; 
+    private DefaultTableModel modelo; 
+    private List<DetalleCompra>listaDC; 
 
     public DetallesCompras() {
         initComponents();
@@ -116,6 +118,7 @@ public class DetallesCompras extends javax.swing.JFrame {
             if(comp==null){
                 JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
             }
+           CargarDetallesCompras(); 
                  
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese un codigo Valido");
@@ -126,7 +129,7 @@ public class DetallesCompras extends javax.swing.JFrame {
 
       private void armarCabeceraTabla(){
         ArrayList<Object> filaCabecera = new ArrayList<>(); 
-        filaCabecera.add("ID COMPRA"); 
+        filaCabecera.add("ID detalles"); 
         filaCabecera.add("Producto"); 
         filaCabecera.add("Cantidad");
         filaCabecera.add("Precio Costo"); 
@@ -136,6 +139,19 @@ public class DetallesCompras extends javax.swing.JFrame {
         }
         jTDetalles.setModel(modelo);
     }
+      
+      
+      
+      
+      private void CargarDetallesCompras(){
+          Integer codigo = Integer.parseInt(jTCodigo.getText()); 
+          comp = compData.obtenerCompraPorId(codigo);
+          listaDC = detCompra.buscarDetallePorCompra(comp);
+          for(DetalleCompra dt:listaDC){
+              modelo.addRow(new Object[]{dt.getIdDetalle(), dt.getProducto().getNombreProducto(),dt.getCantidad(),dt.getPrecioCosto()});              
+          }
+          
+      }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
