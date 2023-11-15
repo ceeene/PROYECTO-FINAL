@@ -145,12 +145,7 @@ public class MenuProveMax extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void JMIListarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListarPActionPerformed
-       escritorio.removeAll();
-        escritorio.repaint();
-        ListarProveedores lp=new ListarProveedores();
-        lp.setVisible(true);
-        escritorio.add(lp);
-        escritorio.moveToFront(lp); 
+       
     }//GEN-LAST:event_JMIListarPActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
