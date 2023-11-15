@@ -29,13 +29,13 @@ public class DetallesCompras extends javax.swing.JFrame {
     private Compra comp = null;
     private DefaultTableModel modelo;
     private List<DetalleCompra> listaDC;
-    ImagenFondo fondo = new ImagenFondo();
+    //ImagenFondo fondo = new ImagenFondo();
 
     public DetallesCompras() {
         initComponents();
-        //this.setContentPane(fondo);
         modelo = new DefaultTableModel();
         armarCabeceraTabla();
+       // this.setContentPane(fondo);
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +52,8 @@ public class DetallesCompras extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(153, 0, 153));
 
         jLabel1.setText("Codigo compra");
 
@@ -236,14 +238,14 @@ public class DetallesCompras extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
-class ImagenFondo extends JPanel {
-
-    private Image imagen;
-
-    public void paint(Graphics g) {
-        imagen = new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
-        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-        setOpaque(false);
-        super.paint(g);
-    }
-}
+//class ImagenFondo extends JPanel {
+//
+//    private Image imagen;
+//
+//    public void paint(Graphics g) {
+//        imagen = new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
+//        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+//        setOpaque(false);
+//        super.paint(g);
+//    }
+//}
