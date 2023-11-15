@@ -143,14 +143,12 @@ public class MenuProveMax extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
+         escritorio.removeAll();
         escritorio.repaint();
-        DetallesCompras detCm =new DetallesCompras();
-        detCm.setVisible(true);
-        detCm.getContentPane().setBackground(new Color(68,167,132));
-        escritorio.add(detCm);
-        escritorio.moveToFront(detCm);
-     
+        DetallesCompras detC=new DetallesCompras();
+        detC.setVisible(true);
+        detC.getContentPane().setBackground(Color.red); 
+        escritorio.add(detC);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
