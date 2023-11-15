@@ -24,12 +24,12 @@ public class CompraData {
  con = Conexion.getConexion();
  
  }
-  public void GuardarCompra (Compra Comp)
+  public void GuardarCompra (Compra Comp){
           String sql= "INSERT INTO compra (idProveedor, fechacompra) "
-          + "VALUES (?,?)"
+          + "VALUES (?,?)";
    try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1,comp.getProveedor().getidProveedor();
+            ps.setInt(1,comp.getProveedor().getidProveedor());
             ps.setDate(2,comp.getCompra .Date.valueOf(Compra.getfecha()));
             ps.executeUpdate();
             
@@ -50,7 +50,7 @@ public class CompraData {
   
 }
   
-  
+  }
   
   
      public List<Producto> ListaProductoXFechadeCompra (Date fecha){
@@ -64,7 +64,7 @@ public class CompraData {
  
          try {
              PreparedStatement ps = con.prepareStatement(sql);
-             ps.setDate(1,fecha)
+             ps.setDate(1,fecha);
          
              
             ResultSet rs= ps.executeQuery();
