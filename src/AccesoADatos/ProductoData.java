@@ -148,4 +148,29 @@ return productos;
    
     
 }
+        public List<Producto> stockMinimo() {
+        ArrayList<Producto> stock= new ArrayList<>();
+          String sql = "SELECT * FROM `producto` WHERE stock<5";
+        try{
+      
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+            ResultSet rs = ps.executeQuery();
+         while (rs.next()) {
+             Producto producto=new Producto();
+            producto.setIdProducto(rs.getInt("idProducto"));
+            producto.setNombreProducto(rs.getString("descripcion"));
+            producto.setPrecioActual(rs.getDouble("precioActual"));
+            producto.setStock(rs.getInt("stock"));
+            producto.setActivo(true);
+    
+        stock.add(producto);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
+        }
+        return stock;
+     }
 }

@@ -202,9 +202,9 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 
                 proData.eliminarProducto(id);
                 
-                
+                limpiarCampos();
             }catch(NumberFormatException ex){
-                
+                JOptionPane.showMessageDialog(this,"Debe ingresar un numero de id valido");
             }
         
         /*if (productoActual!=null){

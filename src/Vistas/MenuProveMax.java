@@ -22,6 +22,7 @@ public class MenuProveMax extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem3 = new javax.swing.JMenuItem();
         ImageIcon icono=new ImageIcon(getClass().getResource("/Vistas/imagenes/fondo.jpg"));
         Image miImagen=icono.getImage();
         escritorio = new javax.swing.JDesktopPane(){
@@ -32,12 +33,15 @@ public class MenuProveMax extends javax.swing.JFrame {
         };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         Cargar = new javax.swing.JMenuItem();
         jMDetalles = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMIListarP = new javax.swing.JMenuItem();
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -57,6 +61,14 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("Productos");
+
+        jMenuItem4.setText("Stock Minimo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         Cargar.setText("Cargar");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +173,15 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.add(pro);
     }//GEN-LAST:event_CargarActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        StockMinimo stock=new StockMinimo();
+        stock.setVisible(true);
+        stock.getContentPane().setBackground(Color.red); 
+        escritorio.add(stock);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -204,5 +225,7 @@ public class MenuProveMax extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
