@@ -37,6 +37,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         Cargar = new javax.swing.JMenuItem();
         jMDetalles = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        JMICompra = new javax.swing.JMenuItem();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMIListarP = new javax.swing.JMenuItem();
@@ -89,6 +90,14 @@ public class MenuProveMax extends javax.swing.JFrame {
             }
         });
         jMDetalles.add(jMenuItem2);
+
+        JMICompra.setText("Realizar Compra");
+        JMICompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMICompraActionPerformed(evt);
+            }
+        });
+        jMDetalles.add(JMICompra);
 
         jMenuBar1.add(jMDetalles);
 
@@ -179,6 +188,15 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.add(stock);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void JMICompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMICompraActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        Compras comp =new Compras();
+        comp.setVisible(true);
+        comp.getContentPane().setBackground(Color.red); 
+        escritorio.add(comp);
+    }//GEN-LAST:event_JMICompraActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -215,6 +233,7 @@ public class MenuProveMax extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Cargar;
     private javax.swing.JMenu JMGestionProvee;
+    private javax.swing.JMenuItem JMICompra;
     private javax.swing.JMenuItem JMIListarP;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMDetalles;
