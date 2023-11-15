@@ -196,14 +196,24 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        if (productoActual!=null){
+     
+            try{
+                Integer id=Integer.parseInt(JTid.getText());
+                
+                proData.eliminarProducto(id);
+                
+                
+            }catch(NumberFormatException ex){
+                
+            }
+        
+        /*if (productoActual!=null){
             proData.eliminarProducto (productoActual.getIdProducto());
             productoActual=null;
-           
+            limpiarCampos();
         }else{
-            JOptionPane.showMessageDialog(this,"No hay un producto seleccionado");
-        }
-         
+            JOptionPane.showMessageDialog(this,"No hay un produ seleccionado");
+        }*/
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
@@ -230,7 +240,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     private void botonguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonguardarActionPerformed
       
         try{
-        
+       
         String nombre=JTnombre.getText();
         String descripcion=JTdescripcion.getText();
         Integer precio=Integer.parseInt(JTprecio.getText());

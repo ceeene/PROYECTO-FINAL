@@ -109,7 +109,7 @@ return producto;
  
        
        public void eliminarProducto(int id) {
-    String sql= "UPDATE producto SET estado= 0 WHERE idProducto= ? ";
+    String sql= "UPDATE producto SET estado=0 WHERE idProducto=? ";
          try{ 
             PreparedStatement ps = con.prepareStatement(sql);
              ps.setInt(1, id);
