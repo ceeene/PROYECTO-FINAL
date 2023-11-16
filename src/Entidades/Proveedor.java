@@ -43,6 +43,10 @@ private boolean activo;
         this.telefono = telefono;
     }
 
+    public Proveedor(boolean activo) {
+        this.activo = activo;
+    }
+
     
     
    

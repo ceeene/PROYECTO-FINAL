@@ -7,10 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
 public class ProveedorData {
+
+//    public static List<Proveedor> obtenerMateriasCursadas() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
      private Connection con = null; //objeto conexion para importar datos a la bdd
      Proveedor proveedor=null;
 
@@ -147,6 +153,32 @@ JOptionPane.showMessageDialog(null,"Error al acceder a los datos de proveedores"
 return proveedor;
     }
        
-
+public List<Proveedor> obtenerProveedoresActivos(boolean activo){
+    ArrayList<Proveedor> proveedores= new ArrayList<>();
+    
+        String sql="SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor WHERE estado=1 ";
+        try{
+        PreparedStatement ps = con.prepareStatement (sql);
+        ps.setBoolean(1, true);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            Proveedor proveedor = new Proveedor();
+            proveedor.setIdProveedor(rs.getInt("idProveedor"));
+            proveedor.setRazonSocial(rs.getString("razonSocial"));
+            proveedor.setDomicilio(rs.getString("domicilio"));
+            proveedor.setTelefono(rs.getInt("telefono"));
+            proveedor.setActivo(rs.getBoolean("estado"));
+            proveedores.add(proveedor);
+        }
+        ps.close();
+        
+    }catch (SQLException ex){
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proveedores");
+    }
+    return proveedores;
+}
+    
+    
+    
 }
 

@@ -5,24 +5,38 @@
  */
 package Vistas;
 
+import AccesoADatos.ProveedorData;
+import Entidades.Proveedor;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author jaane
- */
+
 public class ListarProveedores extends javax.swing.JInternalFrame {
-    ImagenFondo fondo=new ImagenFondo();
+    private DefaultTableModel modelo=new DefaultTableModel(){
+        
+        public boolean isCellEditable (int f, int c){
+            return false;
+        }
+    };
+       
+        ImagenFondo fondo=new ImagenFondo();            
+        private List<Proveedor> proveedores;
+            
 
-    /**
-     * Creates new form NewJInternalFrame
-     */
     public ListarProveedores() {
-        this.setContentPane(fondo);
+        this.setContentPane(fondo); 
         initComponents();
+        armarCabeceraTabla();
+//        pData = new ProveedorData();
+//        listaPA = (List <Proveedor>)pData.obtenerProveedoresActivos(); 
+
+        
+        modelo = new DefaultTableModel(); 
     }
 
     /**
@@ -34,22 +48,96 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTProveedores = new javax.swing.JTable();
+        JRBActivo = new javax.swing.JRadioButton();
+        JRBInactivo = new javax.swing.JRadioButton();
+
+        setTitle("Listar Proveedores");
+
+        jLabel1.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Seleccione estado de proveedor");
+
+        JTProveedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(JTProveedores);
+
+        JRBActivo.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        JRBActivo.setForeground(new java.awt.Color(255, 255, 255));
+        JRBActivo.setText("Activo");
+        JRBActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JRBActivoActionPerformed(evt);
+            }
+        });
+
+        JRBInactivo.setText("Inactivo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(JRBActivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JRBInactivo)
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JRBActivo)
+                    .addComponent(JRBInactivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JRBActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBActivoActionPerformed
+        borrarFilaTabla();
+        JRBInactivo.setSelected(false);
+        cargaProveedoresActivos();
+        
+        JRBActivo.setEnabled(false);
+
+       
+                                                
+    }//GEN-LAST:event_JRBActivoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton JRBActivo;
+    private javax.swing.JRadioButton JRBInactivo;
+    private javax.swing.JTable JTProveedores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 class ImagenFondo extends JPanel{
      private Image imagen;
@@ -62,4 +150,43 @@ class ImagenFondo extends JPanel{
          
         }
  }
+
+        
+
+private void cargaProveedoresActivos(){
+  JRBActivo.setSelected(true);
+  List<Proveedor> listaPA= ProveedorData.obtenerMateriasCursadas(); 
+  DefaultTableModel modelo = new DefaultTableModel();
+  for(Proveedor p: proveedores){
+      modelo.addRow(new Object[]{p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+  }
 }
+
+
+
+
+        private void armarCabeceraTabla(){
+        ArrayList<Object> filaCabecera = new ArrayList<>(); 
+        filaCabecera.add("ID Proveedor"); 
+        filaCabecera.add("Razon Social"); 
+        filaCabecera.add("Domicilio"); 
+        filaCabecera.add("Telefono");
+        filaCabecera.add("Estado"); 
+        for(Object it: filaCabecera){
+            modelo.addColumn(it); 
+        }
+        JTProveedores.setModel(modelo);
+    }
+    
+    private void borrarFilaTabla(){
+        int indice = modelo.getRowCount() -1; 
+        for(int i = indice; i>=0; i--){
+            modelo.removeRow(i);
+        }
+    }
+    
+    }
+
+
+
+
