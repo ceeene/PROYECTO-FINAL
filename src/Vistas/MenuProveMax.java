@@ -63,6 +63,7 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         jMenu1.setText("Productos");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/en-stock.png"))); // NOI18N
         jMenuItem4.setText("Stock Minimo");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +72,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        Cargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/regalo.png"))); // NOI18N
         Cargar.setText("Cargar");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +85,7 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         jMDetalles.setText("Compras");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/factura.png"))); // NOI18N
         jMenuItem2.setText("Detalles de Compras");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +94,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         });
         jMDetalles.add(jMenuItem2);
 
+        JMICompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/carrito-de-compras.png"))); // NOI18N
         JMICompra.setText("Realizar Compra");
         JMICompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

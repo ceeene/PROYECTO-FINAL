@@ -15,7 +15,7 @@
           </Border>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
       <SubComponents>
@@ -26,6 +26,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vistas/imagenes/en-stock.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Stock Minimo"/>
               </Properties>
               <Events>
@@ -34,6 +37,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Cargar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vistas/imagenes/regalo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cargar"/>
               </Properties>
               <Events>
@@ -49,6 +55,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vistas/imagenes/factura.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Detalles de Compras"/>
               </Properties>
               <Events>
@@ -57,6 +66,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMICompra">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Vistas/imagenes/carrito-de-compras.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Realizar Compra"/>
               </Properties>
               <Events>
