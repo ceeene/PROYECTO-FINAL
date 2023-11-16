@@ -36,7 +36,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         Cargar = new javax.swing.JMenuItem();
         jMDetalles = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMIDetalleCompra = new javax.swing.JMenuItem();
         JMICompra = new javax.swing.JMenuItem();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,8 +61,11 @@ public class MenuProveMax extends javax.swing.JFrame {
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jMenu1.setForeground(new java.awt.Color(204, 0, 0));
         jMenu1.setText("Productos");
 
+        jMenuItem4.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jMenuItem4.setForeground(new java.awt.Color(255, 0, 0));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/en-stock.png"))); // NOI18N
         jMenuItem4.setText("Stock Minimo");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +75,8 @@ public class MenuProveMax extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        Cargar.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        Cargar.setForeground(new java.awt.Color(255, 0, 0));
         Cargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/regalo.png"))); // NOI18N
         Cargar.setText("Cargar");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,17 +88,22 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMDetalles.setForeground(new java.awt.Color(255, 0, 0));
         jMDetalles.setText("Compras");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/factura.png"))); // NOI18N
-        jMenuItem2.setText("Detalles de Compras");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMIDetalleCompra.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jMIDetalleCompra.setForeground(new java.awt.Color(255, 0, 0));
+        jMIDetalleCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/factura.png"))); // NOI18N
+        jMIDetalleCompra.setText("Detalles de Compras");
+        jMIDetalleCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMIDetalleCompraActionPerformed(evt);
             }
         });
-        jMDetalles.add(jMenuItem2);
+        jMDetalles.add(jMIDetalleCompra);
 
+        JMICompra.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        JMICompra.setForeground(new java.awt.Color(255, 0, 0));
         JMICompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/carrito-de-compras.png"))); // NOI18N
         JMICompra.setText("Realizar Compra");
         JMICompra.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +115,10 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         jMenuBar1.add(jMDetalles);
 
+        JMGestionProvee.setForeground(new java.awt.Color(255, 0, 0));
         JMGestionProvee.setText("Proveedores");
 
-        jMenuItem1.setFont(new java.awt.Font("Heebo", 1, 12)); // NOI18N
+        jMenuItem1.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         jMenuItem1.setForeground(new java.awt.Color(204, 0, 0));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vistas/imagenes/proveedores.png"))); // NOI18N
         jMenuItem1.setText("Gestion de Proveedores");
@@ -158,10 +169,15 @@ public class MenuProveMax extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void JMIListarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListarPActionPerformed
-       
+       escritorio.removeAll();
+        escritorio.repaint();
+        ListarProveedores lp=new ListarProveedores();
+        lp.setVisible(true);
+        escritorio.add(lp);
+        escritorio.moveToFront(lp);
     }//GEN-LAST:event_JMIListarPActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMIDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIDetalleCompraActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -171,7 +187,7 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.add(detCm);
         escritorio.moveToFront(detCm);
      
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMIDetalleCompraActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
        
@@ -241,10 +257,10 @@ public class MenuProveMax extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMIListarP;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMDetalles;
+    private javax.swing.JMenuItem jMIDetalleCompra;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables

@@ -12,12 +12,15 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Franquito Ledesma
+ * @author jaane
  */
-public class Compras extends javax.swing.JInternalFrame {
+public class ListarProveedores extends javax.swing.JInternalFrame {
     ImagenFondo fondo=new ImagenFondo();
-    
-    public Compras() {
+
+    /**
+     * Creates new form NewJInternalFrame
+     */
+    public ListarProveedores() {
         this.setContentPane(fondo);
         initComponents();
     }
@@ -59,7 +62,4 @@ class ImagenFondo extends JPanel{
          
         }
  }
-
-
-
 }

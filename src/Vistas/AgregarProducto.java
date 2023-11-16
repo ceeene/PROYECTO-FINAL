@@ -7,19 +7,25 @@ package Vistas;
 
 import AccesoADatos.ProductoData;
 import Entidades.Producto;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Usuario
  */
 public class AgregarProducto extends javax.swing.JInternalFrame {
+    ImagenFondo fondo=new ImagenFondo();
 
      private final ProductoData proData=new ProductoData();
     private Producto productoActual=null;
     public AgregarProducto() {
+        this.setContentPane(fondo);
         initComponents();
     }
 
@@ -54,18 +60,32 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
         jButton3.setText("jButton3");
 
+        jLabel1.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Productos");
 
+        jLabel2.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Id Producto");
 
+        jLabel3.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre");
 
+        jLabel4.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripcion");
 
+        jLabel5.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Precio Actual");
 
+        jLabel6.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Stock");
 
+        botonBuscar.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        botonBuscar.setForeground(new java.awt.Color(255, 0, 102));
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,10 +93,16 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado");
 
+        activo.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        activo.setForeground(new java.awt.Color(255, 255, 255));
         activo.setText("Activo");
 
+        botonguardar.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        botonguardar.setForeground(new java.awt.Color(255, 0, 102));
         botonguardar.setText("Guardar");
         botonguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +110,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        botonModificar.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        botonModificar.setForeground(new java.awt.Color(255, 0, 102));
         botonModificar.setText("Modificar");
         botonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +119,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        botonEliminar.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        botonEliminar.setForeground(new java.awt.Color(255, 0, 102));
         botonEliminar.setText("Eliminar");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +128,8 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        botonSalir.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        botonSalir.setForeground(new java.awt.Color(255, 0, 102));
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +180,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                         .addGap(44, 44, 44)
                         .addComponent(botonModificar)
                         .addGap(123, 123, 123)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(botonSalir)
                 .addGap(38, 38, 38))
         );
@@ -183,7 +215,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(activo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonguardar)
                     .addComponent(botonModificar)
@@ -332,4 +364,16 @@ private void limpiarCampos(){
    
     
 }
+
+class ImagenFondo extends JPanel{
+     private Image imagen;
+     
+     public void paint(Graphics g){
+         imagen=new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
+         g.drawImage(imagen,0,0,getWidth(), getHeight(), this);
+        setOpaque(false);
+         super.paint(g);
+         
+        }
+ }
 }

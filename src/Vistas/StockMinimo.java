@@ -7,7 +7,11 @@ package Vistas;
 
 import AccesoADatos.ProductoData;
 import Entidades.Producto;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class StockMinimo extends javax.swing.JInternalFrame {
+     ImagenFondo fondo=new ImagenFondo();
     private DefaultTableModel modelo= new DefaultTableModel (){
 
             };
@@ -25,6 +30,7 @@ public class StockMinimo extends javax.swing.JInternalFrame {
      * Creates new form StockMinimo
      */
     public StockMinimo() {
+         this.setContentPane(fondo);
         initComponents();
         armarCabecera();
          proData = new ProductoData();
@@ -45,8 +51,11 @@ public class StockMinimo extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         cboxProducto = new javax.swing.JTable();
 
+        jLabel1.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Productos de Stock Minimo");
 
+        cboxProducto.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
         cboxProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -65,22 +74,23 @@ public class StockMinimo extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addGap(97, 97, 97)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,5 +117,17 @@ private void armarCabecera(){
         
      
     }
+
+class ImagenFondo extends JPanel{
+     private Image imagen;
+     
+     public void paint(Graphics g){
+         imagen=new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
+         g.drawImage(imagen,0,0,getWidth(), getHeight(), this);
+        setOpaque(false);
+         super.paint(g);
+         
+        }
+ }
 
 }

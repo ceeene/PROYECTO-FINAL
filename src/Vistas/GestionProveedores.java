@@ -52,7 +52,7 @@ private ProveedorData proveeData=new ProveedorData();
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setOpaque(false);
 
-        JLRSocial.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        JLRSocial.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         JLRSocial.setForeground(new java.awt.Color(255, 255, 255));
         JLRSocial.setText("Razon Social:");
 
