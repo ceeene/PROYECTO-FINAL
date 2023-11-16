@@ -23,19 +23,20 @@ import javax.swing.table.DefaultTableModel;
  * @author thiag
  */
 public class DetallesCompras extends javax.swing.JFrame {
-
+    ImagenFondo fondo=new ImagenFondo();
     private CompraData compData = new CompraData();
     private DetalleCompraData detCompra = new DetalleCompraData();
     private Compra comp = null;
     private DefaultTableModel modelo;
     private List<DetalleCompra> listaDC;
-    //ImagenFondo fondo = new ImagenFondo();
+    
 
     public DetallesCompras() {
+        this.setContentPane(fondo);
         initComponents();
         modelo = new DefaultTableModel();
         armarCabeceraTabla();
-       // this.setContentPane(fondo);
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -236,16 +237,22 @@ public class DetallesCompras extends javax.swing.JFrame {
     private javax.swing.JTextField jTCodigo;
     private javax.swing.JTable jTDetalles;
     // End of variables declaration//GEN-END:variables
+
+class ImagenFondo extends JPanel{
+     private Image imagen;
+     
+     public void paint(Graphics g){
+         imagen=new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
+         g.drawImage(imagen,0,0,getWidth(), getHeight(), this);
+        setOpaque(false);
+         super.paint(g);
+         
+        }
+ }
+
+
+
 }
 
-//class ImagenFondo extends JPanel {
-//
-//    private Image imagen;
-//
-//    public void paint(Graphics g) {
-//        imagen = new ImageIcon(getClass().getResource("/Vistas/imagenes/panel.jpg")).getImage();
-//        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-//        setOpaque(false);
-//        super.paint(g);
-//    }
-//}
+
+
