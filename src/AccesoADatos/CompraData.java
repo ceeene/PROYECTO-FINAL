@@ -1,15 +1,23 @@
 package AccesoADatos;
 
 import Entidades.Compra;
+import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import static java.time.temporal.TemporalQueries.localDate;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import AccesoADatos.ProductoData;
+import java.time.LocalDate;
 
 
 public class CompraData {
@@ -17,6 +25,9 @@ public class CompraData {
     private ProveedorData prov=new ProveedorData();
    private ProductoData prodd= new ProductoData();
    private CompraData cmd= new CompraData();
+   
+   
+   
     
  
   public CompraData() {
@@ -24,19 +35,20 @@ public class CompraData {
  con = Conexion.getConexion();
  
  }
-  public void GuardarCompra (Compra Comp){
-          String sql= "INSERT INTO compra (idProveedor, fechacompra) "
-          + "VALUES (?,?)";
+  public void guardarCompra (Compra comp){
+          String sql= "INSERT INTO compra (idProveedor,fecha,estado)"
+          + "VALUES (?,?,?)";
    try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1,comp.getProveedor().getidProveedor());
-            ps.setDate(2,comp.getCompra .Date.valueOf(Compra.getfecha()));
+            ps.setInt(1,comp.getProveedor().getIdProveedor());
+            ps.setDate(2,Date.valueOf(comp.getFecha()));
+            ps.setBoolean(3,comp.isActivo());
             ps.executeUpdate();
             
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
             
-            Compra.setIdCompra(rs.getInt(1));
+            comp.setIdCompra(rs.getInt(1));
             JOptionPane.showMessageDialog(null,"Compra Registrada");
             
         }
@@ -44,20 +56,89 @@ public class CompraData {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-            
-            
-            /*DEBO CREAR UNA VARIABLE DE COMPRA Y PASARLE POR PARAMETRO UN PROVEEDOR Y UNA FECHA*/
-  
+             
 }
   
   }
   
+  public void modificarCompra (Compra comp){
+      
+      String sql="UPDATE compra SET idProveedor= ?, fecha= ?, estado= ?"
+              + "WHERE idCompra= ?";
+      
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1,comp.getProveedor().getIdProveedor());
+            ps.setDate(2,Date.valueOf(comp.getFecha()));
+            ps.setBoolean(3,comp.isActivo());
+            ps.setInt(5,comp.getIdCompra());
+            int exito=ps.executeUpdate();
+            if (exito==1){
+            
+            JOptionPane.showMessageDialog(null,"Alumno modificado");
+            
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al modificar Compra ");
+        }
+      
+              
+  }
   
-     public List<Producto> ListaProductoXFechadeCompra (Date fecha){
+  public void eliminarCompra (int idCompra) {
+  
+  String sql="UPDATE compra SET estado = 0 WHERE idCompra= ?";
+  
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idCompra);
+            int exito=ps.executeUpdate();
+            if (exito==1){
+            
+            JOptionPane.showMessageDialog(null,"Compra eliminada");
+            }
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"error al eliminar");
+        }
+  
+  }
+  
+  
+   public Compra buscarCompra(int id){
+    String sql="SELECT * FROM compra WHERE idCompra = ? AND estado=1"; 
+    Compra compra=null;
+    try{
+    PreparedStatement ps=con.prepareStatement(sql);
+    ps.setInt(1,id);
+    ResultSet rs=ps.executeQuery();
+    if(rs.next()){
+        
+        compra=new Compra();
+        compra.setIdCompra(id);
+        Proveedor pro=prov.buscarProveedorPorId(rs.getInt("idProveedor"));
+        compra.setProveedor(pro);
+        compra.setFecha(rs.getDate("fecha").toLocalDate());
+        compra.setActivo(true);
+    
+    }else{
+        
+       JOptionPane.showMessageDialog(null,"Compra no encontrada"); 
+    }
+    ps.close();
+    
+    }catch (SQLException ex){
+        JOptionPane.showMessageDialog(null,"Error al acceder a la tabla compra");
+    }
+return compra;
+    }
+  
+  public List<Producto>ListaProductoXFechadeCompra(LocalDate fecha){
  
- String sql= "SELECT p.idProducto, nombreProducto, descripcion, precioActual,stock, estado "
-         + "FROM Producto p JOIN Compra c ON (c.idCompra=d.idCompra) JOIN DetalleCompra d ON (d.idproducto=p.idProducto)"
-         + "WHERE Fecha = ?";
+ String sql= "SELECT p.idProducto, nombreProducto, descripcion, precioActual,stock, estado"
+         + "FROM producto p JOIN compra c ON (c.idCompra=d.idCompra) JOIN detallecompra d ON (d.idproducto=p.idProducto)"
+         + "WHERE fecha = ?";
  
  ArrayList<Producto> productos= new ArrayList<>();
  
@@ -71,83 +152,24 @@ public class CompraData {
             
             while (rs.next()){
                 
-              Producto producto= new Producto ();
+              Producto producto= new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
-                producto.setnombreProducto(rs.getString("nombre"));
+                producto.setNombreProducto(rs.getString("nombreProducto"));
                 producto.setDescripcion(rs.getString("descripcion"));
-                producto.setprecioActual(rs.getInt("Precioactual"));
+                producto.setPrecioActual(rs.getInt("Precioactual"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setActivo (true);
                 
                 productos.add(producto);
  }
        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "error");
+            JOptionPane.showMessageDialog(null, "error");
          }
         return productos;
         
- }
-     
-     public List<Compra> ObtenerComprasPorProveedor(Proveedor proveedor) {
-        List<Compra> compras = new ArrayList<>();
-
-        try {
-            String sql = "SELECT idCompra, fecha FROM compra WHERE idProveedor=?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, proveedor.getIdProveedor());
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-               Compra compra = new Compra();
-               compra.setIdCompra(rs.getInt("idCompra"));
-               compra.setProveedor(proveedor);
-               compra.setFecha(rs.getDate("fecha").toLocalDate());
-               compras.add(compra); 
-                
-            }
-            
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compras");
-        }
-        return compras; 
-
-    }
+  }
     
-    public Compra obtenerCompraPorId(int id ){
-        
-        Compra compra= null; 
-        
-        try {
-            String sql= "SELECT * FROM compra WHERE idCompra=?"; 
-            PreparedStatement ps= con.prepareStatement(sql); 
-            ps.setInt(1, id);
-            ResultSet rs= ps.executeQuery(); 
-            
-           while (rs.next()) {
-              compra = new Compra();
-               compra.setIdCompra(id);
-               Proveedor prov = new Proveedor(); 
-               prov.setIdProveedor(rs.getInt("idProveedor"));
-               compra.setProveedor(prov);
-               compra.setFecha(rs.getDate("fecha").toLocalDate());
-                
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error ala acceder a la tabla compra"+ex.getMessage());
-        }
-        return compra; 
-    }
-     
-     /*PRUEBA
-     CompraData prod= new prod()
-     for (Producto producto:prod.ListaProductoXFechadeCompra);
-     
-     sout (producto.getIdproducto);
-     sout (producto.getNombre);
-     sout (producto.getStock);
-     */
-     
-     public List<Compra> ListaComprasXProveedor (int idProveedor){
+ public List<Compra> ListaComprasXProveedor (int idProveedor){
  
  String sql= "SELECT idCompra, idProveedor, fecha FROM compra c, DetalleCompra d "
          + "WHERE c.idCompra=d.idCompra"
@@ -158,56 +180,56 @@ public class CompraData {
  
          try {
              PreparedStatement ps = con.prepareStatement(sql);
-             ps.setInt(1,idProveedor)
+             ps.setInt(1,idProveedor);
          
              
             ResultSet rs= ps.executeQuery();
             
             while (rs.next()){
                 
-              Compra compr= new Compra ();
-                Compra.setIdCompra(rs.getInt("idCompra"));
-                Proveedor pro=prov.buscarProveedorPorId(rs.getInt("idProveedor"))
-                Compra.setProveedor(pro);
-                Compra.setfecha(rs.getDate("fecha").toLocalDate());
+                Compra compr= new Compra();
+                compr.setIdCompra(rs.getInt("idCompra"));
+                Proveedor pro=prov.buscarProveedorPorId(rs.getInt("idProveedor"));
+                compr.setProveedor(pro);
+                compr.setFecha(rs.getDate("fecha").toLocalDate());
                 
                 compras.add(compr);
  }
        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "error");
+            JOptionPane.showMessageDialog(null, "error");
          }
         return compras;
  }
-     public List<Producto> ListaproductosXCompra (int idCompra){
+ public List<Producto> ListaproductosXCompra (int idCompra){
  
  String sql= "SELECT  d.idDetalle, d.idProducto, d.idCompra,d.cantidad, d.precioCosto"
-         + "  FROM detallecompra d,compra c"
-         + " WHERE d.idCompra=c.idCompra"
-         + "AND idCompra= ?"
+         + "FROM detallecompra d,compra c"
+         + "WHERE d.idCompra=c.idCompra"
+         + "AND idCompra= ?";
  
  ArrayList<Producto> productos= new ArrayList<>();
  
  
-         try{
+         try {
              PreparedStatement ps = con.prepareStatement(sql);
              ps.setInt(1,idCompra);
              ResultSet rs= ps.executeQuery();
              while (rs.next()){
-                detallecompra detal= new detallecompra();
-                detal.setidDetalle(rs.getInt("idDetalle"));
-                Producto pr= prodd.BuscarProducto(rs.getInt("idProducto"))
-                detal.setProducto(pr)       
-               Compra compd =cmd.BuscarCompra(rs.getInt"idCompra")
-               detal.setCompra(compd)
-               detal.setcantidad(rs.getInt("cantidad"))   
-                detal.setprecioCosto(rs.getdouble"precioCosto")       
-              
+                DetalleCompra detal= new DetalleCompra();
+                detal.setIdDetalle(rs.getInt("idDetalle"));
+                Producto pr= prodd.buscarproducto(rs.getInt("idProducto"));
+                detal.setProducto(pr);       
+               Compra compd =cmd.buscarCompra(rs.getInt("idCompra"));
+               detal.setCompra(compd);
+               detal.setCantidad(rs.getInt("cantidad")); 
+               detal.setPrecioCosto(rs.getDouble("precioCosto"));   
+               productos.add(detal);
+             }
+             ps.close();
                 
                } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "error");
+            JOptionPane.showMessageDialog(null, "error");
          }
-                productos.add(detal);
- }
-     ps.close();
-/*
+         return productos;
+    }
 }
