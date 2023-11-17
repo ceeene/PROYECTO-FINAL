@@ -21,9 +21,9 @@ import java.util.List;
 public class CompraData {
 
     private Connection con = null;
-    private ProveedorData prov = new ProveedorData();
+    //private ProveedorData prov = new ProveedorData();
     private ProductoData prodd = new ProductoData();
-    private CompraData cmd = new CompraData();
+    //private CompraData cmd = new CompraData();
 
     public CompraData() {
 
@@ -149,33 +149,33 @@ public class CompraData {
         return compra;
     }
 
-    public Compra buscarCompra(int id) {
-        String sql = "SELECT * FROM compra WHERE idCompra = ? AND estado=1";
-        Compra compra = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-
-                compra = new Compra();
-                compra.setIdCompra(id);
-                Proveedor pro = prov.buscarProveedorPorId(rs.getInt("idProveedor"));
-                compra.setProveedor(pro);
-                compra.setFecha(rs.getDate("fecha").toLocalDate());
-                compra.setActivo(true);
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "Compra no encontrada");
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
-        }
-        return compra;
-    }
+//    public Compra buscarCompra(int id) {
+//        String sql = "SELECT * FROM compra WHERE idCompra = ? AND estado=1";
+//        Compra compra = null;
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//
+//                compra = new Compra();
+//                compra.setIdCompra(id);
+//                Proveedor pro = prov.buscarProveedorPorId(rs.getInt("idProveedor"));
+//                compra.setProveedor(pro);
+//                compra.setFecha(rs.getDate("fecha").toLocalDate());
+//                compra.setActivo(true);
+//
+//            } else {
+//
+//                JOptionPane.showMessageDialog(null, "Compra no encontrada");
+//            }
+//            ps.close();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla compra");
+//        }
+//        return compra;
+//    }
 
     public List<Producto> ListaProductoXFechadeCompra(LocalDate fecha) {
 
@@ -210,65 +210,67 @@ public class CompraData {
 
     }
 
-    public List<Compra> ListaComprasXProveedor(int idProveedor) {
+//    public List<Compra> ListaComprasXProveedor(int idProveedor) {
+//
+//        String sql = "SELECT idCompra, idProveedor, fecha FROM compra c, DetalleCompra d "
+//                + "WHERE c.idCompra=d.idCompra"
+//                + "AND c.idProveedor = ?";
+//
+//        ArrayList<Compra> compras = new ArrayList<>();
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, idProveedor);
+//
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//
+//                Compra compr = new Compra();
+//                compr.setIdCompra(rs.getInt("idCompra"));
+//                Proveedor pro = prov.buscarProveedorPorId(rs.getInt("idProveedor"));
+//                compr.setProveedor(pro);
+//                compr.setFecha(rs.getDate("fecha").toLocalDate());
+//
+//                compras.add(compr);
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "error");
+//        }
+//        return compras;
+//    }
+//}
 
-        String sql = "SELECT idCompra, idProveedor, fecha FROM compra c, DetalleCompra d "
-                + "WHERE c.idCompra=d.idCompra"
-                + "AND c.idProveedor = ?";
-
-        ArrayList<Compra> compras = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idProveedor);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-
-                Compra compr = new Compra();
-                compr.setIdCompra(rs.getInt("idCompra"));
-                Proveedor pro = prov.buscarProveedorPorId(rs.getInt("idProveedor"));
-                compr.setProveedor(pro);
-                compr.setFecha(rs.getDate("fecha").toLocalDate());
-
-                compras.add(compr);
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error");
-        }
-        return compras;
-    }
-
-    public List<Producto> ListaproductosXCompra(int idCompra) {
-
-        String sql = "SELECT  d.idDetalle, d.idProducto, d.idCompra,d.cantidad, d.precioCosto"
-                + " FROM detallecompra d,compra c"
-                + " WHERE d.idCompra=c.idCompra"
-                + "AND idCompra= ?";
-
-        ArrayList<Producto> productos = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idCompra);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                DetalleCompra detal = new DetalleCompra();
-                detal.setIdDetalle(rs.getInt("idDetalle"));
-                Producto pr = prodd.buscarproducto(rs.getInt("idProducto"));
-                detal.setProducto(pr);
-                Compra compd = cmd.buscarCompra(rs.getInt("idCompra"));
-                detal.setCompra(compd);
-                detal.setCantidad(rs.getInt("cantidad"));
-                detal.setPrecioCosto(rs.getDouble("precioCosto"));
-                productos.add(pr);
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error");
-        }
-        return productos;
-    }
+//    public List<Producto> ListaproductosXCompra(int idCompra) {
+//
+//        String sql = "SELECT  d.idDetalle, d.idProducto, d.idCompra,d.cantidad, d.precioCosto"
+//                + " FROM detallecompra d,compra c"
+//                + " WHERE d.idCompra=c.idCompra"
+//                + "AND idCompra= ?";
+//
+//        ArrayList<Producto> productos = new ArrayList<>();
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, idCompra);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                DetalleCompra detal = new DetalleCompra();
+//                detal.setIdDetalle(rs.getInt("idDetalle"));
+//                Producto pr = prodd.buscarproducto(rs.getInt("idProducto"));
+//                detal.setProducto(pr);
+//                Compra compd = cmd.buscarCompra(rs.getInt("idCompra"));
+//                detal.setCompra(compd);
+//                detal.setCantidad(rs.getInt("cantidad"));
+//                detal.setPrecioCosto(rs.getDouble("precioCosto"));
+//                productos.add(pr);
+//            }
+//            ps.close();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "error");
+//        }
+//        return productos;
+//    }
+//}
 }

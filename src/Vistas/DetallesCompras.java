@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vistas;
 
 import AccesoADatos.CompraData;
@@ -18,10 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author thiag
- */
+
 public class DetallesCompras extends javax.swing.JFrame {
     ImagenFondo fondo=new ImagenFondo();
     private CompraData compData = new CompraData();
@@ -187,7 +181,7 @@ public class DetallesCompras extends javax.swing.JFrame {
 
     private void CargarDetallesCompras() {
         Integer codigo = Integer.parseInt(jTCodigo.getText());
-        comp = compData.obtenerCompraPorId(codigo);
+        //comp = compData.obtenerCompraPorId(codigo);
         listaDC = detCompra.buscarDetallePorCompra(comp);
         for (DetalleCompra dt : listaDC) {
             modelo.addRow(new Object[]{dt.getIdDetalle(), dt.getProducto().getNombreProducto(), dt.getCantidad(), dt.getPrecioCosto()});
@@ -249,11 +243,11 @@ class ImagenFondo extends JPanel{
          
         }
  }
-
-
-
-
 }
+
+
+
+
 
 
 
