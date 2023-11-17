@@ -123,7 +123,7 @@ public class ListarProveedores extends javax.swing.JInternalFrame {
     private void JRBActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBActivoActionPerformed
         borrarFilaTabla();
         JRBInactivo.setSelected(false);
-        cargaProveedoresActivos();
+       // cargaProveedoresActivos();
         
         JRBActivo.setEnabled(false);
 
@@ -153,14 +153,14 @@ class ImagenFondo extends JPanel{
 
         
 
-private void cargaProveedoresActivos(){
-  JRBActivo.setSelected(true);
-  List<Proveedor> listaPA= ProveedorData.obtenerMateriasCursadas(); 
-  DefaultTableModel modelo = new DefaultTableModel();
-  for(Proveedor p: proveedores){
-      modelo.addRow(new Object[]{p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
-  }
-}
+//private void cargaProveedoresActivos(){
+//  JRBActivo.setSelected(true);
+//  List<Proveedor> listaPA= ProveedorData.obtenerMateriasCursadas(); 
+//  DefaultTableModel modelo = new DefaultTableModel();
+//  for(Proveedor p: proveedores){
+//      modelo.addRow(new Object[]{p.getIdProveedor(), p.getRazonSocial(), p.getDomicilio(), p.getTelefono(), p.isActivo()});
+//  }
+//}
 
 
 

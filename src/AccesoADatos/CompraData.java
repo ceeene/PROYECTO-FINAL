@@ -4,8 +4,6 @@ import Entidades.Compra;
 import Entidades.DetalleCompra;
 import Entidades.Producto;
 import Entidades.Proveedor;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import AccesoADatos.ProductoData;
 import java.time.LocalDate;
+import java.util.List;
 
 public class CompraData {
 
@@ -181,14 +180,14 @@ public class CompraData {
     public List<Producto> ListaProductoXFechadeCompra(LocalDate fecha) {
 
         String sql = "SELECT p.idProducto, nombreProducto, descripcion, precioActual,stock, estado"
-                + "FROM producto p JOIN compra c ON (c.idCompra=d.idCompra) JOIN detallecompra d ON (d.idproducto=p.idProducto)"
-                + "WHERE fecha = ?";
+                + " FROM producto p JOIN compra c ON (c.idCompra=d.idCompra) JOIN detallecompra d ON (d.idproducto=p.idProducto)"
+                + " WHERE fecha = ?";
 
         ArrayList<Producto> productos = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, fecha);
+            ps.setDate(1, java.sql.Date.valueOf(fecha));
 
             ResultSet rs = ps.executeQuery();
 
@@ -244,8 +243,8 @@ public class CompraData {
     public List<Producto> ListaproductosXCompra(int idCompra) {
 
         String sql = "SELECT  d.idDetalle, d.idProducto, d.idCompra,d.cantidad, d.precioCosto"
-                + "FROM detallecompra d,compra c"
-                + "WHERE d.idCompra=c.idCompra"
+                + " FROM detallecompra d,compra c"
+                + " WHERE d.idCompra=c.idCompra"
                 + "AND idCompra= ?";
 
         ArrayList<Producto> productos = new ArrayList<>();
@@ -263,7 +262,7 @@ public class CompraData {
                 detal.setCompra(compd);
                 detal.setCantidad(rs.getInt("cantidad"));
                 detal.setPrecioCosto(rs.getDouble("precioCosto"));
-                productos.add(detal);
+                productos.add(pr);
             }
             ps.close();
 
