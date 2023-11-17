@@ -180,14 +180,16 @@ public class DetallesCompras extends javax.swing.JFrame {
     }
 
     private void CargarDetallesCompras() {
+        
         Integer codigo = Integer.parseInt(jTCodigo.getText());
         //comp = compData.obtenerCompraPorId(codigo);
         listaDC = detCompra.buscarDetallePorCompra(comp);
         for (DetalleCompra dt : listaDC) {
             modelo.addRow(new Object[]{dt.getIdDetalle(), dt.getProducto().getNombreProducto(), dt.getCantidad(), dt.getPrecioCosto()});
         }
-
+        
     }
+    borraFila();
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -243,6 +245,12 @@ class ImagenFondo extends JPanel{
          
         }
  }
+private void borraFila(){
+         int ind = modelo.getRowCount()-1; 
+         for(int i = ind; i>=0; i--){
+             modelo.removeRow(i);
+         }
+     }
 }
 
 

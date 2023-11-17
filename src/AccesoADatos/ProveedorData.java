@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
 
 public class ProveedorData {
 
-//    public static List<Proveedor> obtenerMateriasCursadas() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
      private Connection con = null; //objeto conexion para importar datos a la bdd
      Proveedor proveedor=null;
 
