@@ -16,7 +16,11 @@ public class Compra {
         this.fecha = fecha;
         this.activo = activo;   
     }
-
+    public Compra(Proveedor proveedor, LocalDate fecha, boolean activo) {
+        this.proveedor = proveedor;
+        this.fecha = fecha;
+        this.activo = activo;   
+    }
     public Compra() {
     }
 
@@ -40,9 +44,12 @@ public class Compra {
         this.proveedor = proveedor;
     }
 
+   
+
     public LocalDate getFecha() {
         return fecha;
     }
+    
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;

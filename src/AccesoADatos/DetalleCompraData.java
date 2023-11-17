@@ -27,14 +27,15 @@ public class DetalleCompraData {
     
     
     public void GuardarDetalleDeCompras(DetalleCompra detallecompra) {
-        String sql = " INSERT INTO detallecompra(cantidad, precioCosto, idCompra, idProducto)"
+        String sql = " INSERT INTO detallecompra(idCompra, idProductocantidad, precioCosto)"
                 + " VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, detallecompra.getCantidad());
-            ps.setDouble(2, detallecompra.getPrecioCosto());
-            ps.setInt(3, detallecompra.getCompra().getIdCompra());
-            ps.setInt(4, detallecompra.getProducto().getIdProducto());
+             ps.setInt(1, detallecompra.getCompra().getIdCompra());
+            ps.setInt(2, detallecompra.getProducto().getIdProducto());
+            ps.setInt(3, detallecompra.getCantidad());
+            ps.setDouble(4, detallecompra.getPrecioCosto());
+           
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();

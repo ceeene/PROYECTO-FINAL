@@ -301,12 +301,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         try{
-         
+        Integer id=Integer.parseInt(JTid.getText());
         String nombre=JTnombre.getText();
         String descripcion=JTdescripcion.getText();
         Integer precio=Integer.parseInt(JTprecio.getText());
         Integer stock=Integer.parseInt(JTstock.getText());
-        Integer id=Integer.parseInt(JTid.getText());
         
         if(nombre.isEmpty()|| descripcion.isEmpty()){
             JOptionPane.showMessageDialog(this,"No puede haber campos vacios");

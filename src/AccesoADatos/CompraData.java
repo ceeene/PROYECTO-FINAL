@@ -33,7 +33,7 @@ public class CompraData {
 
     public void guardarCompra(Compra comp) {
         String sql = "INSERT INTO compra (idProveedor,fecha,estado)"
-                + "VALUES (?,?,?)";
+                + " VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, comp.getProveedor().getIdProveedor());
