@@ -40,7 +40,6 @@ public class MenuProveMax extends javax.swing.JFrame {
         JMICompra = new javax.swing.JMenuItem();
         JMGestionProvee = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        JMIListarP = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -129,14 +128,6 @@ public class MenuProveMax extends javax.swing.JFrame {
         });
         JMGestionProvee.add(jMenuItem1);
 
-        JMIListarP.setText("Listar Proveedores");
-        JMIListarP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMIListarPActionPerformed(evt);
-            }
-        });
-        JMGestionProvee.add(JMIListarP);
-
         jMenuBar1.add(JMGestionProvee);
 
         setJMenuBar(jMenuBar1);
@@ -167,15 +158,6 @@ public class MenuProveMax extends javax.swing.JFrame {
         escritorio.moveToFront(gp);
                                     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void JMIListarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListarPActionPerformed
-       escritorio.removeAll();
-        escritorio.repaint();
-        ListarProveedores lp=new ListarProveedores();
-        lp.setVisible(true);
-        escritorio.add(lp);
-        escritorio.moveToFront(lp);
-    }//GEN-LAST:event_JMIListarPActionPerformed
 
     private void jMIDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIDetalleCompraActionPerformed
         // TODO add your handling code here:
@@ -254,7 +236,6 @@ public class MenuProveMax extends javax.swing.JFrame {
     private javax.swing.JMenuItem Cargar;
     private javax.swing.JMenu JMGestionProvee;
     private javax.swing.JMenuItem JMICompra;
-    private javax.swing.JMenuItem JMIListarP;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMDetalles;
     private javax.swing.JMenuItem jMIDetalleCompra;
