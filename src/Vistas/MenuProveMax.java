@@ -89,6 +89,11 @@ public class MenuProveMax extends javax.swing.JFrame {
 
         jMDetalles.setForeground(new java.awt.Color(255, 0, 0));
         jMDetalles.setText("Compras");
+        jMDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMDetallesActionPerformed(evt);
+            }
+        });
 
         jMIDetalleCompra.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         jMIDetalleCompra.setForeground(new java.awt.Color(255, 0, 0));
@@ -198,6 +203,15 @@ public class MenuProveMax extends javax.swing.JFrame {
         comp.getContentPane().setBackground(Color.red); 
         escritorio.add(comp);
     }//GEN-LAST:event_JMICompraActionPerformed
+
+    private void jMDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetallesActionPerformed
+         escritorio.removeAll();
+        escritorio.repaint();
+        DetallesCompras dc=new DetallesCompras();
+        dc.setVisible(true);
+        escritorio.add(dc);
+        escritorio.moveToFront(dc);
+    }//GEN-LAST:event_jMDetallesActionPerformed
 
     
     public static void main(String args[]) {

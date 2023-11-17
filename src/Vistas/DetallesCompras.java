@@ -252,6 +252,7 @@ class ImagenFondo extends JPanel{
 
 
 
+
 }
 
 
